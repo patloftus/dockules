@@ -27,8 +27,7 @@ WORKDIR /src
 RUN git clone \
     --depth 1 \
     --branch Release_${HERCULES_VERSION} \
-    https://github.com/SDL-Hercules-390/hyperion.git \
-
+    https://github.com/SDL-Hercules-390/hyperion.git
 
 WORKDIR /src/hyperion
 
