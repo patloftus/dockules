@@ -1,6 +1,7 @@
 FROM debian:bookworm AS builder
 
 ARG HERCULES_VERSION=4.9.1
+ARG TARGETARCH
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -26,13 +27,12 @@ WORKDIR /src
 RUN git clone \
     --depth 1 \
     --branch Release_${HERCULES_VERSION} \
-    https://github.com/SDL-Hercules-390/hyperion.git
+    https://github.com/SDL-Hercules-390/hyperion.git \
 
 
 WORKDIR /src/hyperion
 
-RUN ./bootstrap && \
-    ./configure \
+RUN ./configure \
         --enable-cckd-bzip2 && \
     make -j$(nproc) && \
     make install DESTDIR=/install
